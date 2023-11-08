@@ -1,32 +1,43 @@
 package A01_Stack;
 
+public class Stack<T> {
 
-public class Stack<T>
-{
-	 private Node<T> first;
+    private Node<T> first;
+    private int count;
+
     /**
      * Oberstes Element entfernen und zurückliefern.
      * Existiert kein Element, wird eine Exception ausgelöst.
-     * @throws StackEmptyException 
+     * @throws StackEmptyException
      */
     public T pop() throws StackEmptyException {
+        if (first == null) {
+            throw new StackEmptyException();
+        }
 
-    	return null;
+        T topData = first.getData();
+        first = first.getNext();
+        count--;
+
+        return topData;
     }
-    
+
     /**
      * Übergebenen T auf Stack (als oberstes Element) speichern.
-     * @param i data
+     * @param data
      */
-    public void push(T i) {
-
+    public void push(T data) {
+        Node<T> newNode = new Node<>(data);
+        newNode.setNext(first);
+        first = newNode;
+        count++;
     }
-    
+
     /**
      * Liefert die Anzahl der Elemente im Stack
      * @return
      */
     public int getCount() {
-    	return 0;
+        return count;
     }
 }
